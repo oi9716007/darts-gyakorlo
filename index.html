@@ -23,62 +23,91 @@
 
   <!-- ===================== MAIN MENU ===================== -->
   <section id="screen-menu" class="screen">
-    <h1 class="app-title">🎯 <span data-i18n="title">Darts Practice</span></h1>
+    <div class="menu-header">
+      <h1 class="app-title">🎯 <span data-i18n="title">Darts Practice</span></h1>
 
-    <!-- Language picker: inline SVG flags (emoji flags do not render on Windows) -->
-    <div class="lang-row" id="lang-row">
-      <button class="lang-btn" data-lang="nl" aria-label="Nederlands">
-        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#21468B"/><rect width="30" height="13.3" fill="#fff"/><rect width="30" height="6.7" fill="#AE1C28"/></svg>
-      </button>
-      <button class="lang-btn" data-lang="es" aria-label="Español">
-        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>
-      </button>
-      <button class="lang-btn" data-lang="de" aria-label="Deutsch">
-        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#FFCE00"/><rect width="30" height="13.3" fill="#DD0000"/><rect width="30" height="6.7" fill="#000"/></svg>
-      </button>
-      <button class="lang-btn" data-lang="en" aria-label="English">
-        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#012169"/><path d="M0,0 30,20 M30,0 0,20" stroke="#fff" stroke-width="4"/><path d="M0,0 30,20 M30,0 0,20" stroke="#C8102E" stroke-width="2"/><path d="M15,0 V20 M0,10 H30" stroke="#fff" stroke-width="7"/><path d="M15,0 V20 M0,10 H30" stroke="#C8102E" stroke-width="4"/></svg>
-      </button>
-      <button class="lang-btn" data-lang="hu" aria-label="Magyar">
-        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#477050"/><rect width="30" height="13.3" fill="#fff"/><rect width="30" height="6.7" fill="#CE2939"/></svg>
-      </button>
-      <button class="lang-btn" data-lang="sr" aria-label="Srpski">
-        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#fff"/><rect width="30" height="13.3" fill="#0C4076"/><rect width="30" height="6.7" fill="#C6363C"/></svg>
-      </button>
-      <button class="lang-btn" data-lang="sk" aria-label="Slovenčina">
-        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#EE1C25"/><rect width="30" height="13.3" fill="#0B4EA2"/><rect width="30" height="6.7" fill="#fff"/><path d="M9,6 h6 v5 a3,3 0 0 1 -3,3 a3,3 0 0 1 -3,-3 z" fill="#EE1C25" stroke="#fff" stroke-width="0.8"/><path d="M12,7 v5 M10,9 h4" stroke="#fff" stroke-width="1.1"/></svg>
-      </button>
-      <button class="lang-btn" data-lang="ro" aria-label="Română">
-        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#CE1126"/><rect width="20" height="20" fill="#FCD116"/><rect width="10" height="20" fill="#002B7F"/></svg>
-      </button>
-      <button class="lang-btn" data-lang="pl" aria-label="Polski">
-        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#DC143C"/><rect width="30" height="10" fill="#fff"/></svg>
-      </button>
+      <!-- Language dropdown: inline SVG flags (emoji flags do not render on Windows) -->
+      <div class="lang-dropdown">
+        <button class="lang-toggle" id="lang-toggle" aria-label="Language">
+          <span id="lang-current-flag"></span><span class="lang-caret">▾</span>
+        </button>
+        <div class="lang-menu hidden" id="lang-menu">
+          <button class="lang-btn" data-lang="nl" aria-label="Nederlands">
+            <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#21468B"/><rect width="30" height="13.3" fill="#fff"/><rect width="30" height="6.7" fill="#AE1C28"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="es" aria-label="Español">
+            <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="de" aria-label="Deutsch">
+            <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#FFCE00"/><rect width="30" height="13.3" fill="#DD0000"/><rect width="30" height="6.7" fill="#000"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="en" aria-label="English">
+            <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#012169"/><path d="M0,0 30,20 M30,0 0,20" stroke="#fff" stroke-width="4"/><path d="M0,0 30,20 M30,0 0,20" stroke="#C8102E" stroke-width="2"/><path d="M15,0 V20 M0,10 H30" stroke="#fff" stroke-width="7"/><path d="M15,0 V20 M0,10 H30" stroke="#C8102E" stroke-width="4"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="hu" aria-label="Magyar">
+            <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#477050"/><rect width="30" height="13.3" fill="#fff"/><rect width="30" height="6.7" fill="#CE2939"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="sr" aria-label="Srpski">
+            <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#fff"/><rect width="30" height="13.3" fill="#0C4076"/><rect width="30" height="6.7" fill="#C6363C"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="sk" aria-label="Slovenčina">
+            <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#EE1C25"/><rect width="30" height="13.3" fill="#0B4EA2"/><rect width="30" height="6.7" fill="#fff"/><path d="M9,6 h6 v5 a3,3 0 0 1 -3,3 a3,3 0 0 1 -3,-3 z" fill="#EE1C25" stroke="#fff" stroke-width="0.8"/><path d="M12,7 v5 M10,9 h4" stroke="#fff" stroke-width="1.1"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="ro" aria-label="Română">
+            <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#CE1126"/><rect width="20" height="20" fill="#FCD116"/><rect width="10" height="20" fill="#002B7F"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="pl" aria-label="Polski">
+            <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#DC143C"/><rect width="30" height="10" fill="#fff"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
 
+    <!-- Compact cards: everything fits on one phone screen -->
     <div class="menu-grid">
-      <button class="bubble-card" data-game="random">
+      <div class="bubble-card" data-game="random" role="button" tabindex="0">
         <span class="bubble-icon">🎲</span>
-        <span class="bubble-title">Random Target</span>
-        <span class="bubble-desc" data-i18n="descRandom">Practice random targets</span>
-      </button>
-      <button class="bubble-card" data-game="around">
+        <span class="bubble-text">
+          <span class="bubble-title">Random Target</span>
+          <span class="bubble-desc" data-i18n="descRandom">Practice random targets</span>
+        </span>
+        <button class="info-btn" data-info="infoRandom" aria-label="Info">i</button>
+      </div>
+      <div class="bubble-card" data-game="around" role="button" tabindex="0">
         <span class="bubble-icon">🔄</span>
-        <span class="bubble-title">Around the Board</span>
-        <span class="bubble-desc" data-i18n="descAround">Walk around the board</span>
-      </button>
-      <button class="bubble-card" data-game="calculate">
+        <span class="bubble-text">
+          <span class="bubble-title">Around the Board</span>
+          <span class="bubble-desc" data-i18n="descAround">Walk around the board</span>
+        </span>
+        <button class="info-btn" data-info="infoAround" aria-label="Info">i</button>
+      </div>
+      <div class="bubble-card" data-game="calculate" role="button" tabindex="0">
         <span class="bubble-icon">🧮</span>
-        <span class="bubble-title">Calculate</span>
-        <span class="bubble-desc" data-i18n="descCalc">Darts mental math</span>
-      </button>
-      <button class="bubble-card" data-game="battle">
+        <span class="bubble-text">
+          <span class="bubble-title">Calculate</span>
+          <span class="bubble-desc" data-i18n="descCalc">Darts mental math</span>
+        </span>
+        <button class="info-btn" data-info="infoCalc" aria-label="Info">i</button>
+      </div>
+      <div class="bubble-card" data-game="battle" role="button" tabindex="0">
         <span class="bubble-icon">⚔️</span>
-        <span class="bubble-title" data-i18n="battleName">War Against the Board</span>
-        <span class="bubble-desc" data-i18n="descBattle">Beat the board, round by round</span>
-      </button>
+        <span class="bubble-text">
+          <span class="bubble-title" data-i18n="battleName">War Against the Board</span>
+          <span class="bubble-desc" data-i18n="descBattle">Beat the board, round by round</span>
+        </span>
+        <button class="info-btn" data-info="infoBattle" aria-label="Info">i</button>
+      </div>
     </div>
   </section>
+
+  <!-- Game info modal (opened by the "i" buttons) -->
+  <div id="info-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3 id="info-title"></h3>
+      <p class="info-text" id="info-text"></p>
+      <button class="btn btn-primary info-ok" id="info-close">OK</button>
+    </div>
+  </div>
 
   <!-- ===================== RANDOM TARGET ===================== -->
   <section id="screen-random" class="screen">
@@ -201,11 +230,6 @@
       <div class="progress-line" id="bt-first-to">First to 10 wins</div>
       <div class="target-big" id="bt-threshold">60</div>
 
-      <!-- Actual thrown score: needed for the end-of-match stats -->
-      <input type="number" id="bt-score" class="lock-input bt-input" min="0" max="180"
-             inputmode="numeric" data-i18n-ph="btYourScore" placeholder="Your 3-dart score">
-      <p class="lock-error hidden" id="bt-error" data-i18n="btEnterScore">Enter your score first (0–180)</p>
-
       <!-- Point bubbles: tap whoever won the round -->
       <div class="battle-bubbles">
         <button class="battle-bubble me" id="bt-me">
@@ -219,19 +243,11 @@
           <span class="bb-points" id="bt-board-points">0</span>
         </button>
       </div>
-
-      <!-- Manual counters for the stats -->
-      <div class="mini-counters">
-        <button class="mini-counter" id="bt-t20">T20 · <span id="bt-t20-count">0</span></button>
-        <button class="mini-counter" id="bt-t19">T19 · <span id="bt-t19-count">0</span></button>
-      </div>
     </div>
 
-    <!-- Match result + stats -->
+    <!-- Match result -->
     <div class="game-card hidden" id="bt-result">
       <div class="done-msg" id="bt-winner"></div>
-      <div class="stats-title" data-i18n="btStats">Match stats</div>
-      <div class="stats-list" id="bt-stats"></div>
       <button class="btn btn-primary" id="bt-again" data-i18n="playAgain">Play again</button>
     </div>
   </section>

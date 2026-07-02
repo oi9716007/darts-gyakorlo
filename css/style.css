@@ -46,70 +46,122 @@ button {
 /* ===== Main menu ===== */
 .app-title {
   text-align: center;
-  font-size: 1.8rem;
-  margin: 24px 0;
+  font-size: 1.5rem;
+  margin: 0;
 }
 
-/* ===== Language picker (flags) ===== */
-.lang-row {
+.menu-header {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 12px;
   max-width: 420px;
-  margin: 0 auto 20px;
+  margin: 12px auto 18px;
+}
+
+/* ===== Language dropdown (flags) ===== */
+.lang-dropdown { position: relative; }
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--card);
+  border-radius: 999px;
+  padding: 10px 12px;
+  min-height: 44px;
+  box-shadow: var(--shadow);
+  line-height: 0;
+}
+.lang-caret { font-size: 0.8rem; color: var(--muted); line-height: 1; }
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  z-index: 20;
 }
 .lang-btn {
   line-height: 0;
   background: transparent;
   border: 3px solid transparent;
   border-radius: 12px;
-  padding: 9px;
+  padding: 8px;
   min-width: 48px;
-  min-height: 48px;
+  min-height: 44px;
   transition: transform 0.1s;
 }
-.lang-btn .flag {
+.flag {
   width: 30px;
   height: 20px;
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(90, 70, 40, 0.3);
 }
 .lang-btn:active { transform: scale(0.9); }
-.lang-btn.active { background: var(--card); border-color: var(--green); box-shadow: var(--shadow); }
+.lang-btn.active { border-color: var(--green); }
 
 .menu-grid {
   display: flex;
   flex-direction: column;   /* stacked on mobile */
-  gap: 18px;
+  gap: 12px;
   max-width: 420px;
   margin: 0 auto;
 }
 
+/* Compact horizontal cards so all 4 fit on one phone screen */
 .bubble-card {
   background: var(--card);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 28px 20px;
+  padding: 14px 14px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 6px;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
   transition: transform 0.1s;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .bubble-card:active { transform: scale(0.97); }
 
-.bubble-icon { font-size: 2.4rem; }
-.bubble-title { font-size: 1.3rem; font-weight: 700; }
-.bubble-desc { font-size: 0.9rem; color: var(--muted); }
+.bubble-icon { font-size: 1.7rem; }
+.bubble-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.bubble-title { font-size: 1.05rem; font-weight: 700; }
+.bubble-desc { font-size: 0.8rem; color: var(--muted); }
 
-/* grid layout on larger screens */
+/* "i" info button on every card */
+.info-btn {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #f6efe0;
+  color: var(--muted);
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+.info-btn:active { background: #ece1c8; }
+
+.info-text { font-size: 1rem; line-height: 1.5; margin: 0 0 18px; }
+.info-ok { width: 100%; }
+
+/* 2x2 grid layout on larger screens */
 @media (min-width: 700px) {
   .menu-grid {
     flex-direction: row;
-    max-width: 900px;
+    flex-wrap: wrap;
+    max-width: 760px;
   }
-  .bubble-card { flex: 1; }
+  .bubble-card { flex: 1 1 40%; }
 }
 
 /* ===== Game header ===== */
@@ -236,10 +288,6 @@ button {
 .done-msg { font-size: 1.4rem; font-weight: 700; }
 
 /* ===== War Against the Board ===== */
-.bt-input {
-  max-width: 240px;
-  font-size: 1.3rem;
-}
 .battle-bubbles {
   display: flex;
   gap: 20px;
@@ -267,30 +315,6 @@ button {
 .bb-emoji { font-size: 1.8rem; }
 .bb-label { font-size: 1rem; font-weight: 700; }
 .bb-points { font-size: 2.2rem; font-weight: 800; line-height: 1; }
-
-.mini-counters { display: flex; gap: 12px; }
-.mini-counter {
-  background: #f6efe0;
-  color: var(--text);
-  border-radius: 999px;
-  padding: 12px 18px;
-  font-size: 1rem;
-  font-weight: 700;
-  min-height: 48px;
-}
-.mini-counter:active { background: #ece1c8; }
-
-.stats-title { font-size: 1.05rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
-.stats-list { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 8px; }
-.stats-row {
-  display: flex;
-  justify-content: space-between;
-  background: #f6efe0;
-  border-radius: 12px;
-  padding: 10px 16px;
-  font-weight: 600;
-}
-.stats-value { font-weight: 800; }
 
 /* ===== Access lock ===== */
 .lock-card {
