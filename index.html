@@ -9,8 +9,20 @@
 </head>
 <body>
 
+  <!-- ===================== ACCESS LOCK ===================== -->
+  <!-- Simple client-side gate: only a friendly filter, not real security -->
+  <section id="screen-lock" class="screen active">
+    <div class="lock-card">
+      <h1 class="app-title">🎯 Darts Practice</h1>
+      <p class="lock-hint">Enter the access code to continue</p>
+      <input type="password" id="lock-input" autocomplete="off" placeholder="Access code" class="lock-input">
+      <button class="btn btn-primary lock-btn" id="lock-submit">Unlock</button>
+      <p class="lock-error hidden" id="lock-error">Incorrect code, try again.</p>
+    </div>
+  </section>
+
   <!-- ===================== MAIN MENU ===================== -->
-  <section id="screen-menu" class="screen active">
+  <section id="screen-menu" class="screen">
     <h1 class="app-title">🎯 Darts Practice</h1>
     <div class="menu-grid">
       <button class="bubble-card" data-game="random">
@@ -136,6 +148,7 @@
     </div>
   </section>
 
+  <script src="js/lock.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/random-target.js"></script>
   <script src="js/around-board.js"></script>

@@ -38,6 +38,9 @@ button {
 /* ===== Screen switching ===== */
 .screen { display: none; min-height: 100vh; padding: 16px; }
 .screen.active { display: block; }
+
+/* Lock screen centers its card both ways, unlike the other screens */
+#screen-lock.active { display: flex; align-items: center; justify-content: center; }
 .hidden { display: none !important; }
 
 /* ===== Main menu ===== */
@@ -203,6 +206,31 @@ button {
 }
 
 .done-msg { font-size: 1.4rem; font-weight: 700; }
+
+/* ===== Access lock ===== */
+.lock-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+.lock-hint { color: var(--muted); margin: 8px 0 20px; }
+.lock-input {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.1rem; /* >=16px so iOS does not zoom on focus */
+  text-align: center;
+  letter-spacing: 2px;
+  border: 2px solid #e2d5ba;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+.lock-btn { width: 100%; }
+.lock-error { color: var(--red-dark); font-weight: 600; margin-top: 14px; }
 
 /* ===== Modal ===== */
 .modal-overlay {
