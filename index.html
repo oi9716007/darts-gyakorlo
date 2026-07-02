@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Mobile viewport: no zoom, no double-tap magnification -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Darts Practice</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===================== MAIN MENU ===================== -->
+  <section id="screen-menu" class="screen active">
+    <h1 class="app-title">🎯 Darts Practice</h1>
+    <div class="menu-grid">
+      <button class="bubble-card" data-game="random">
+        <span class="bubble-icon">🎲</span>
+        <span class="bubble-title">Random Target</span>
+        <span class="bubble-desc">Practice random targets</span>
+      </button>
+      <button class="bubble-card" data-game="around">
+        <span class="bubble-icon">🔄</span>
+        <span class="bubble-title">Around the Board</span>
+        <span class="bubble-desc">Walk around the board</span>
+      </button>
+      <button class="bubble-card" data-game="calculate">
+        <span class="bubble-icon">🧮</span>
+        <span class="bubble-title">Calculate</span>
+        <span class="bubble-desc">Darts mental math</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===================== RANDOM TARGET ===================== -->
+  <section id="screen-random" class="screen">
+    <header class="game-header">
+      <button class="btn btn-back" data-back>← Menu</button>
+      <h2>Random Target</h2>
+      <button class="btn btn-reset" id="rt-reset">Reset</button>
+    </header>
+
+    <div class="game-card">
+      <div class="target-type" id="rt-type">Simple</div>
+      <div class="target-big" id="rt-target">20</div>
+      <div class="counter" id="rt-counter">0 / 3</div>
+      <button class="btn-plus" id="rt-plus" aria-label="Hit">+</button>
+    </div>
+  </section>
+
+  <!-- Random Target settings modal -->
+  <div id="rt-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3>Settings</h3>
+      <p class="modal-hint">How many hits per target?</p>
+      <label class="setting-row">
+        <span>Simple</span>
+        <input type="number" id="rt-set-simple" min="1" max="20" value="3" inputmode="numeric">
+      </label>
+      <label class="setting-row">
+        <span>Double</span>
+        <input type="number" id="rt-set-double" min="1" max="20" value="5" inputmode="numeric">
+      </label>
+      <label class="setting-row">
+        <span>Triple</span>
+        <input type="number" id="rt-set-triple" min="1" max="20" value="5" inputmode="numeric">
+      </label>
+      <div class="modal-actions">
+        <button class="btn btn-back" data-back>Cancel</button>
+        <button class="btn btn-primary" id="rt-start">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== AROUND THE BOARD ===================== -->
+  <section id="screen-around" class="screen">
+    <header class="game-header">
+      <button class="btn btn-back" data-back>← Menu</button>
+      <h2>Around the Board</h2>
+      <button class="btn btn-reset" id="ab-reset">Reset</button>
+    </header>
+
+    <div class="game-card">
+      <div class="progress-line" id="ab-progress">1 / 21 numbers</div>
+      <div class="target-type" id="ab-phase">Simple</div>
+      <div class="target-big" id="ab-target">20</div>
+
+      <!-- Simple phase: mark 3 darts with a check or an X -->
+      <div id="ab-simple-ui">
+        <div class="dart-slots" id="ab-slots"></div>
+        <div class="hitmiss-row">
+          <button class="btn-hit" id="ab-hit" aria-label="Hit">✓</button>
+          <button class="btn-miss" id="ab-miss" aria-label="Miss">✗</button>
+        </div>
+        <button class="btn btn-primary hidden" id="ab-retry">Retry</button>
+      </div>
+
+      <!-- Double phase: 1 check -->
+      <div id="ab-double-ui" class="hidden">
+        <button class="btn-hit big" id="ab-double-ok" aria-label="Done">✓</button>
+      </div>
+
+      <!-- Triple phase: counter + plus button (same as Random Target) -->
+      <div id="ab-triple-ui" class="hidden">
+        <div class="counter" id="ab-counter">0 / 3</div>
+        <button class="btn-plus" id="ab-plus" aria-label="Hit">+</button>
+      </div>
+
+      <!-- Completion screen -->
+      <div id="ab-done-ui" class="hidden">
+        <div class="done-msg">🏆 Done! You made it around the board!</div>
+        <button class="btn btn-primary" id="ab-restart">Restart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CALCULATE ===================== -->
+  <section id="screen-calculate" class="screen">
+    <header class="game-header">
+      <button class="btn btn-back" data-back>← Menu</button>
+      <h2>Calculate</h2>
+      <button class="btn btn-reset" id="calc-restart">Restart</button>
+    </header>
+
+    <div class="game-card">
+      <div class="progress-line" id="calc-score">Score: 0 / 0</div>
+      <div class="question" id="calc-question">Question...</div>
+      <div class="answers" id="calc-answers"></div>
+      <div class="feedback hidden" id="calc-feedback"></div>
+      <button class="btn btn-primary hidden" id="calc-next">Next question</button>
+    </div>
+
+    <!-- Round summary -->
+    <div class="game-card hidden" id="calc-summary">
+      <div class="done-msg" id="calc-summary-text"></div>
+      <button class="btn btn-primary" id="calc-again">Restart</button>
+    </div>
+  </section>
+
+  <script src="js/questions.js"></script>
+  <script src="js/random-target.js"></script>
+  <script src="js/around-board.js"></script>
+  <script src="js/calculate.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

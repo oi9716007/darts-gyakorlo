@@ -1,0 +1,287 @@
+/* ===== Base settings, mobile-first ===== */
+:root {
+  --bg: #e9dcc3;          /* light sandy brown background */
+  --card: #ffffff;
+  --text: #3b3128;
+  --muted: #8a7b66;
+  --green: #2eae5a;
+  --green-dark: #22884a;
+  --red: #e0484d;
+  --red-dark: #b83338;
+  --radius: 22px;
+  --shadow: 0 4px 14px rgba(90, 70, 40, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+  /* touch-action does NOT inherit, so disable double-tap zoom on every element */
+  touch-action: manipulation;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ===== Screen switching ===== */
+.screen { display: none; min-height: 100vh; padding: 16px; }
+.screen.active { display: block; }
+.hidden { display: none !important; }
+
+/* ===== Main menu ===== */
+.app-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin: 24px 0;
+}
+
+.menu-grid {
+  display: flex;
+  flex-direction: column;   /* stacked on mobile */
+  gap: 18px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.bubble-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.1s;
+}
+.bubble-card:active { transform: scale(0.97); }
+
+.bubble-icon { font-size: 2.4rem; }
+.bubble-title { font-size: 1.3rem; font-weight: 700; }
+.bubble-desc { font-size: 0.9rem; color: var(--muted); }
+
+/* grid layout on larger screens */
+@media (min-width: 700px) {
+  .menu-grid {
+    flex-direction: row;
+    max-width: 900px;
+  }
+  .bubble-card { flex: 1; }
+}
+
+/* ===== Game header ===== */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  max-width: 560px;
+  margin: 0 auto 16px;
+}
+.game-header h2 { font-size: 1.1rem; margin: 0; text-align: center; flex: 1; }
+
+/* ===== Generic buttons ===== */
+.btn {
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 48px;
+}
+.btn-back { background: #fff; color: var(--text); box-shadow: var(--shadow); }
+.btn-reset { background: #fff; color: var(--red); box-shadow: var(--shadow); }
+.btn-primary { background: var(--green); color: #fff; box-shadow: var(--shadow); }
+.btn-primary:active { background: var(--green-dark); }
+
+/* ===== Game card ===== */
+.game-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 28px 20px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  /* prevent double-tap text selection on game surfaces */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.target-type {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.target-big {
+  font-size: clamp(4.5rem, 24vw, 8rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.counter { font-size: 1.6rem; font-weight: 700; }
+
+.progress-line { font-size: 0.95rem; color: var(--muted); font-weight: 600; }
+
+/* ===== Big green plus button ===== */
+.btn-plus {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 3.5rem;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  transition: transform 0.1s;
+}
+.btn-plus:active { background: var(--green-dark); transform: scale(0.94); }
+
+/* ===== Around the Board: dart markers ===== */
+.dart-slots {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+.dart-slot {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 3px dashed #d6c7a8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+}
+.dart-slot.hit { background: var(--green); border-color: var(--green); border-style: solid; }
+.dart-slot.miss { background: var(--red); border-color: var(--red); border-style: solid; }
+
+.hitmiss-row { display: flex; gap: 24px; }
+
+.btn-hit, .btn-miss {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.1s;
+}
+.btn-hit { background: var(--green); }
+.btn-hit:active { background: var(--green-dark); transform: scale(0.94); }
+.btn-hit.big { width: 110px; height: 110px; font-size: 3rem; }
+.btn-miss { background: var(--red); }
+.btn-miss:active { background: var(--red-dark); transform: scale(0.94); }
+.btn-hit:disabled, .btn-miss:disabled { opacity: 0.4; }
+
+#ab-simple-ui, #ab-double-ui, #ab-triple-ui, #ab-done-ui {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.done-msg { font-size: 1.4rem; font-weight: 700; }
+
+/* ===== Modal ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(60, 45, 25, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10;
+}
+.modal-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  width: 100%;
+  max-width: 360px;
+}
+.modal-card h3 { margin: 0 0 4px; font-size: 1.3rem; text-align: center; }
+.modal-hint { text-align: center; color: var(--muted); margin: 0 0 16px; }
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.setting-row input {
+  width: 90px;
+  padding: 12px;
+  font-size: 1.2rem; /* >=16px so iOS does not zoom on focus */
+  text-align: center;
+  border: 2px solid #e2d5ba;
+  border-radius: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.modal-actions .btn { flex: 1; }
+
+/* ===== Calculate ===== */
+.question {
+  font-size: 1.25rem;
+  font-weight: 700;
+  min-height: 3em;
+  display: flex;
+  align-items: center;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.answer-btn {
+  background: #f6efe0;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: left;
+  min-height: 56px;
+  color: var(--text);
+}
+.answer-btn .letter { font-weight: 800; color: var(--muted); margin-right: 8px; }
+.answer-btn.correct { background: var(--green); color: #fff; }
+.answer-btn.correct .letter { color: #fff; }
+.answer-btn.wrong { background: var(--red); color: #fff; }
+.answer-btn.wrong .letter { color: #fff; }
+.answer-btn:disabled { cursor: default; }
+
+.feedback { font-size: 1.1rem; font-weight: 700; }
+.feedback.good { color: var(--green-dark); }
+.feedback.bad { color: var(--red-dark); }
