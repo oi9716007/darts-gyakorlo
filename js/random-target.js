@@ -1,22 +1,27 @@
 // ===== Random Target game =====
-// Draws random targets (simple / double / triple); once the configured
+// Draws random targets (simple / double / triple / D25); once the configured
 // number of hits is reached, a new target is drawn automatically.
+// Rules: simple is 1-20 only (no 25), D25 is its own target type with its
+// own hit count, and after a triple the next 5 targets are never triples.
 const RandomTarget = (() => {
   // Drawable values per type
-  const SIMPLE_VALUES = [...Array.from({ length: 20 }, (_, i) => i + 1), 25];
-  const DOUBLE_VALUES = [...Array.from({ length: 20 }, (_, i) => i + 1), 25];
+  const SIMPLE_VALUES = Array.from({ length: 20 }, (_, i) => i + 1); // 1-20, no 25
+  const DOUBLE_VALUES = Array.from({ length: 20 }, (_, i) => i + 1); // D1-D20
   const TRIPLE_VALUES = [17, 18, 19, 20]; // never T16 or below!
+  const TRIPLE_GAP = 5; // required non-triple targets between two triples
 
   // Game state (isolated from the other games)
-  let settings = { simple: 3, double: 5, triple: 5 };
-  let target = null;   // { type, value }
+  let settings = { simple: 3, double: 5, triple: 5, bull: 3 };
+  let target = null;        // { type, value }
   let hits = 0;
+  let tripleCooldown = 0;   // how many non-triple targets are still owed
 
   const el = {
     modal: document.getElementById("rt-modal"),
     inpSimple: document.getElementById("rt-set-simple"),
     inpDouble: document.getElementById("rt-set-double"),
     inpTriple: document.getElementById("rt-set-triple"),
+    inpBull: document.getElementById("rt-set-bull"),
     startBtn: document.getElementById("rt-start"),
     type: document.getElementById("rt-type"),
     target: document.getElementById("rt-target"),
@@ -29,13 +34,24 @@ const RandomTarget = (() => {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
-  // Draw a new random target
+  // Draw a new random target, honouring the triple spacing rule
   function nextTarget() {
-    const type = rand(["simple", "double", "triple"]);
+    const types = tripleCooldown > 0
+      ? ["simple", "double", "bull"]
+      : ["simple", "double", "triple", "bull"];
+    const type = rand(types);
+
+    if (type === "triple") {
+      tripleCooldown = TRIPLE_GAP; // next 5 targets must be non-triple
+    } else if (tripleCooldown > 0) {
+      tripleCooldown--;
+    }
+
     const value =
       type === "simple" ? rand(SIMPLE_VALUES) :
       type === "double" ? rand(DOUBLE_VALUES) :
-      rand(TRIPLE_VALUES);
+      type === "triple" ? rand(TRIPLE_VALUES) :
+      25; // bull
     target = { type, value };
     hits = 0;
     render();
@@ -44,12 +60,13 @@ const RandomTarget = (() => {
   function targetLabel() {
     const { type, value } = target;
     if (type === "simple") return String(value);
-    if (type === "double") return value === 25 ? "D25 (Bull)" : "D" + value;
-    return "T" + value;
+    if (type === "double") return "D" + value;
+    if (type === "triple") return "T" + value;
+    return "D25"; // bull
   }
 
   function typeLabel() {
-    return { simple: "Simple", double: "Double", triple: "Triple" }[target.type];
+    return { simple: "Simple", double: "Double", triple: "Triple", bull: "Bull" }[target.type];
   }
 
   function needed() {
@@ -87,8 +104,10 @@ const RandomTarget = (() => {
       simple: readSetting(el.inpSimple, 3),
       double: readSetting(el.inpDouble, 5),
       triple: readSetting(el.inpTriple, 5),
+      bull: readSetting(el.inpBull, 3),
     };
     el.modal.classList.add("hidden");
+    tripleCooldown = 0;
     nextTarget();
   }
 
@@ -96,6 +115,7 @@ const RandomTarget = (() => {
   function init() {
     target = null;
     hits = 0;
+    tripleCooldown = 0;
     el.type.textContent = "—";
     el.target.textContent = "?";
     el.counter.textContent = "0 / 0";

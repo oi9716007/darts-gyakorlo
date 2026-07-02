@@ -122,18 +122,18 @@ const AroundBoard = (() => {
     el.retry.classList.add("hidden");
 
     if (phase === "done") {
-      el.phase.textContent = "Done";
+      el.phase.textContent = I18N.t("abDone");
       el.target.textContent = "🎯";
-      el.progress.textContent = TOTAL_STEPS + " / " + TOTAL_STEPS + " numbers";
+      el.progress.textContent = I18N.fmt(I18N.t("abNumbers"), { a: TOTAL_STEPS, b: TOTAL_STEPS });
       el.doneUi.classList.remove("hidden");
       return;
     }
 
     const step = Math.min(numberIndex + 1, TOTAL_STEPS);
-    el.progress.textContent = step + " / " + TOTAL_STEPS + " numbers";
+    el.progress.textContent = I18N.fmt(I18N.t("abNumbers"), { a: step, b: TOTAL_STEPS });
 
     if (phase === "bull") {
-      el.phase.textContent = "Finish";
+      el.phase.textContent = I18N.t("abFinish");
       el.target.textContent = "D25 (Bull)";
       el.doubleUi.classList.remove("hidden"); // 1 check, same as double
       return;

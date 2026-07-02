@@ -34,7 +34,7 @@ const Calculate = (() => {
   }
 
   function renderScore() {
-    el.score.textContent = "Score: " + score + " / " + answered;
+    el.score.textContent = I18N.t("calcScore") + ": " + score + " / " + answered;
   }
 
   // Render the current question with shuffled answer order
@@ -71,7 +71,7 @@ const Calculate = (() => {
     if (chosen === correct) {
       score++;
       btn.classList.add("correct");
-      el.feedback.textContent = "✓ Correct!";
+      el.feedback.textContent = I18N.t("calcCorrect");
       el.feedback.classList.add("good");
     } else {
       btn.classList.add("wrong");
@@ -79,7 +79,7 @@ const Calculate = (() => {
       buttons.forEach(b => {
         if (b.dataset.value === correct) b.classList.add("correct");
       });
-      el.feedback.textContent = "✗ Wrong! The correct answer is: " + correct;
+      el.feedback.textContent = I18N.fmt(I18N.t("calcWrong"), { a: correct });
       el.feedback.classList.add("bad");
     }
     el.feedback.classList.remove("hidden");
@@ -99,12 +99,12 @@ const Calculate = (() => {
   function showSummary() {
     el.card.classList.add("hidden");
     el.summary.classList.remove("hidden");
-    el.summaryText.textContent = "🏁 Finished! Your result: " + score + " / " + answered;
+    el.summaryText.textContent = I18N.fmt(I18N.t("calcSummary"), { a: score, b: answered });
   }
 
-  // New round: shuffled questions, score reset to zero
+  // New round: shuffled questions in the current language, score reset
   function init() {
-    deck = shuffle(QUESTIONS);
+    deck = shuffle(QuestionBank.build());
     index = 0;
     score = 0;
     answered = 0;

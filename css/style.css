@@ -50,6 +50,34 @@ button {
   margin: 24px 0;
 }
 
+/* ===== Language picker (flags) ===== */
+.lang-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 420px;
+  margin: 0 auto 20px;
+}
+.lang-btn {
+  line-height: 0;
+  background: transparent;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  padding: 9px;
+  min-width: 48px;
+  min-height: 48px;
+  transition: transform 0.1s;
+}
+.lang-btn .flag {
+  width: 30px;
+  height: 20px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(90, 70, 40, 0.3);
+}
+.lang-btn:active { transform: scale(0.9); }
+.lang-btn.active { background: var(--card); border-color: var(--green); box-shadow: var(--shadow); }
+
 .menu-grid {
   display: flex;
   flex-direction: column;   /* stacked on mobile */
@@ -206,6 +234,63 @@ button {
 }
 
 .done-msg { font-size: 1.4rem; font-weight: 700; }
+
+/* ===== War Against the Board ===== */
+.bt-input {
+  max-width: 240px;
+  font-size: 1.3rem;
+}
+.battle-bubbles {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+.battle-bubble {
+  flex: 1;
+  max-width: 170px;
+  border-radius: 26px;
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.1s;
+}
+.battle-bubble:active { transform: scale(0.95); }
+.battle-bubble.me { background: var(--green); }
+.battle-bubble.me:active { background: var(--green-dark); }
+.battle-bubble.board { background: var(--red); }
+.battle-bubble.board:active { background: var(--red-dark); }
+.bb-emoji { font-size: 1.8rem; }
+.bb-label { font-size: 1rem; font-weight: 700; }
+.bb-points { font-size: 2.2rem; font-weight: 800; line-height: 1; }
+
+.mini-counters { display: flex; gap: 12px; }
+.mini-counter {
+  background: #f6efe0;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 700;
+  min-height: 48px;
+}
+.mini-counter:active { background: #ece1c8; }
+
+.stats-title { font-size: 1.05rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+.stats-list { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 8px; }
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  background: #f6efe0;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+}
+.stats-value { font-weight: 800; }
 
 /* ===== Access lock ===== */
 .lock-card {

@@ -13,32 +13,69 @@
   <!-- Simple client-side gate: only a friendly filter, not real security -->
   <section id="screen-lock" class="screen active">
     <div class="lock-card">
-      <h1 class="app-title">🎯 Darts Practice</h1>
-      <p class="lock-hint">Enter the access code to continue</p>
-      <input type="password" id="lock-input" autocomplete="off" placeholder="Access code" class="lock-input">
-      <button class="btn btn-primary lock-btn" id="lock-submit">Unlock</button>
-      <p class="lock-error hidden" id="lock-error">Incorrect code, try again.</p>
+      <h1 class="app-title">🎯 <span data-i18n="title">Darts Practice</span></h1>
+      <p class="lock-hint" data-i18n="lockHint">Enter the access code to continue</p>
+      <input type="password" id="lock-input" autocomplete="off" data-i18n-ph="lockPlaceholder" placeholder="Access code" class="lock-input">
+      <button class="btn btn-primary lock-btn" id="lock-submit" data-i18n="unlock">Unlock</button>
+      <p class="lock-error hidden" id="lock-error" data-i18n="lockError">Incorrect code, try again.</p>
     </div>
   </section>
 
   <!-- ===================== MAIN MENU ===================== -->
   <section id="screen-menu" class="screen">
-    <h1 class="app-title">🎯 Darts Practice</h1>
+    <h1 class="app-title">🎯 <span data-i18n="title">Darts Practice</span></h1>
+
+    <!-- Language picker: inline SVG flags (emoji flags do not render on Windows) -->
+    <div class="lang-row" id="lang-row">
+      <button class="lang-btn" data-lang="nl" aria-label="Nederlands">
+        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#21468B"/><rect width="30" height="13.3" fill="#fff"/><rect width="30" height="6.7" fill="#AE1C28"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="es" aria-label="Español">
+        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="de" aria-label="Deutsch">
+        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#FFCE00"/><rect width="30" height="13.3" fill="#DD0000"/><rect width="30" height="6.7" fill="#000"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="en" aria-label="English">
+        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#012169"/><path d="M0,0 30,20 M30,0 0,20" stroke="#fff" stroke-width="4"/><path d="M0,0 30,20 M30,0 0,20" stroke="#C8102E" stroke-width="2"/><path d="M15,0 V20 M0,10 H30" stroke="#fff" stroke-width="7"/><path d="M15,0 V20 M0,10 H30" stroke="#C8102E" stroke-width="4"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="hu" aria-label="Magyar">
+        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#477050"/><rect width="30" height="13.3" fill="#fff"/><rect width="30" height="6.7" fill="#CE2939"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="sr" aria-label="Srpski">
+        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#fff"/><rect width="30" height="13.3" fill="#0C4076"/><rect width="30" height="6.7" fill="#C6363C"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="sk" aria-label="Slovenčina">
+        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#EE1C25"/><rect width="30" height="13.3" fill="#0B4EA2"/><rect width="30" height="6.7" fill="#fff"/><path d="M9,6 h6 v5 a3,3 0 0 1 -3,3 a3,3 0 0 1 -3,-3 z" fill="#EE1C25" stroke="#fff" stroke-width="0.8"/><path d="M12,7 v5 M10,9 h4" stroke="#fff" stroke-width="1.1"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="ro" aria-label="Română">
+        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#CE1126"/><rect width="20" height="20" fill="#FCD116"/><rect width="10" height="20" fill="#002B7F"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="pl" aria-label="Polski">
+        <svg viewBox="0 0 30 20" class="flag"><rect width="30" height="20" fill="#DC143C"/><rect width="30" height="10" fill="#fff"/></svg>
+      </button>
+    </div>
+
     <div class="menu-grid">
       <button class="bubble-card" data-game="random">
         <span class="bubble-icon">🎲</span>
         <span class="bubble-title">Random Target</span>
-        <span class="bubble-desc">Practice random targets</span>
+        <span class="bubble-desc" data-i18n="descRandom">Practice random targets</span>
       </button>
       <button class="bubble-card" data-game="around">
         <span class="bubble-icon">🔄</span>
         <span class="bubble-title">Around the Board</span>
-        <span class="bubble-desc">Walk around the board</span>
+        <span class="bubble-desc" data-i18n="descAround">Walk around the board</span>
       </button>
       <button class="bubble-card" data-game="calculate">
         <span class="bubble-icon">🧮</span>
         <span class="bubble-title">Calculate</span>
-        <span class="bubble-desc">Darts mental math</span>
+        <span class="bubble-desc" data-i18n="descCalc">Darts mental math</span>
+      </button>
+      <button class="bubble-card" data-game="battle">
+        <span class="bubble-icon">⚔️</span>
+        <span class="bubble-title" data-i18n="battleName">War Against the Board</span>
+        <span class="bubble-desc" data-i18n="descBattle">Beat the board, round by round</span>
       </button>
     </div>
   </section>
@@ -46,7 +83,7 @@
   <!-- ===================== RANDOM TARGET ===================== -->
   <section id="screen-random" class="screen">
     <header class="game-header">
-      <button class="btn btn-back" data-back>← Menu</button>
+      <button class="btn btn-back" data-back data-i18n="back">← Menu</button>
       <h2>Random Target</h2>
       <button class="btn btn-reset" id="rt-reset">Reset</button>
     </header>
@@ -62,8 +99,8 @@
   <!-- Random Target settings modal -->
   <div id="rt-modal" class="modal-overlay hidden">
     <div class="modal-card">
-      <h3>Settings</h3>
-      <p class="modal-hint">How many hits per target?</p>
+      <h3 data-i18n="settings">Settings</h3>
+      <p class="modal-hint" data-i18n="rtHint">How many hits per target?</p>
       <label class="setting-row">
         <span>Simple</span>
         <input type="number" id="rt-set-simple" min="1" max="20" value="3" inputmode="numeric">
@@ -76,9 +113,13 @@
         <span>Triple</span>
         <input type="number" id="rt-set-triple" min="1" max="20" value="5" inputmode="numeric">
       </label>
+      <label class="setting-row">
+        <span>D25 (Bull)</span>
+        <input type="number" id="rt-set-bull" min="1" max="20" value="3" inputmode="numeric">
+      </label>
       <div class="modal-actions">
-        <button class="btn btn-back" data-back>Cancel</button>
-        <button class="btn btn-primary" id="rt-start">Start</button>
+        <button class="btn btn-back" data-back data-i18n="cancel">Cancel</button>
+        <button class="btn btn-primary" id="rt-start" data-i18n="start">Start</button>
       </div>
     </div>
   </div>
@@ -86,13 +127,13 @@
   <!-- ===================== AROUND THE BOARD ===================== -->
   <section id="screen-around" class="screen">
     <header class="game-header">
-      <button class="btn btn-back" data-back>← Menu</button>
+      <button class="btn btn-back" data-back data-i18n="back">← Menu</button>
       <h2>Around the Board</h2>
       <button class="btn btn-reset" id="ab-reset">Reset</button>
     </header>
 
     <div class="game-card">
-      <div class="progress-line" id="ab-progress">1 / 21 numbers</div>
+      <div class="progress-line" id="ab-progress">1 / 21</div>
       <div class="target-type" id="ab-phase">Simple</div>
       <div class="target-big" id="ab-target">20</div>
 
@@ -103,7 +144,7 @@
           <button class="btn-hit" id="ab-hit" aria-label="Hit">✓</button>
           <button class="btn-miss" id="ab-miss" aria-label="Miss">✗</button>
         </div>
-        <button class="btn btn-primary hidden" id="ab-retry">Retry</button>
+        <button class="btn btn-primary hidden" id="ab-retry" data-i18n="retry">Retry</button>
       </div>
 
       <!-- Double phase: 1 check -->
@@ -119,8 +160,8 @@
 
       <!-- Completion screen -->
       <div id="ab-done-ui" class="hidden">
-        <div class="done-msg">🏆 Done! You made it around the board!</div>
-        <button class="btn btn-primary" id="ab-restart">Restart</button>
+        <div class="done-msg" data-i18n="abDoneMsg">🏆 Done! You made it around the board!</div>
+        <button class="btn btn-primary" id="ab-restart" data-i18n="restart">Restart</button>
       </div>
     </div>
   </section>
@@ -128,9 +169,9 @@
   <!-- ===================== CALCULATE ===================== -->
   <section id="screen-calculate" class="screen">
     <header class="game-header">
-      <button class="btn btn-back" data-back>← Menu</button>
+      <button class="btn btn-back" data-back data-i18n="back">← Menu</button>
       <h2>Calculate</h2>
-      <button class="btn btn-reset" id="calc-restart">Restart</button>
+      <button class="btn btn-reset" id="calc-restart" data-i18n="restart">Restart</button>
     </header>
 
     <div class="game-card">
@@ -138,21 +179,90 @@
       <div class="question" id="calc-question">Question...</div>
       <div class="answers" id="calc-answers"></div>
       <div class="feedback hidden" id="calc-feedback"></div>
-      <button class="btn btn-primary hidden" id="calc-next">Next question</button>
+      <button class="btn btn-primary hidden" id="calc-next" data-i18n="calcNext">Next question</button>
     </div>
 
     <!-- Round summary -->
     <div class="game-card hidden" id="calc-summary">
       <div class="done-msg" id="calc-summary-text"></div>
-      <button class="btn btn-primary" id="calc-again">Restart</button>
+      <button class="btn btn-primary" id="calc-again" data-i18n="restart">Restart</button>
     </div>
   </section>
 
+  <!-- ===================== WAR AGAINST THE BOARD ===================== -->
+  <section id="screen-battle" class="screen">
+    <header class="game-header">
+      <button class="btn btn-back" data-back data-i18n="back">← Menu</button>
+      <h2 data-i18n="battleName">War Against the Board</h2>
+      <button class="btn btn-reset" id="bt-reset">Reset</button>
+    </header>
+
+    <div class="game-card" id="bt-card">
+      <div class="progress-line" id="bt-first-to">First to 10 wins</div>
+      <div class="target-big" id="bt-threshold">60</div>
+
+      <!-- Actual thrown score: needed for the end-of-match stats -->
+      <input type="number" id="bt-score" class="lock-input bt-input" min="0" max="180"
+             inputmode="numeric" data-i18n-ph="btYourScore" placeholder="Your 3-dart score">
+      <p class="lock-error hidden" id="bt-error" data-i18n="btEnterScore">Enter your score first (0–180)</p>
+
+      <!-- Point bubbles: tap whoever won the round -->
+      <div class="battle-bubbles">
+        <button class="battle-bubble me" id="bt-me">
+          <span class="bb-emoji">😎</span>
+          <span class="bb-label" data-i18n="btMe">Me</span>
+          <span class="bb-points" id="bt-me-points">0</span>
+        </button>
+        <button class="battle-bubble board" id="bt-board">
+          <span class="bb-emoji">🎯</span>
+          <span class="bb-label" data-i18n="btBoard">Board</span>
+          <span class="bb-points" id="bt-board-points">0</span>
+        </button>
+      </div>
+
+      <!-- Manual counters for the stats -->
+      <div class="mini-counters">
+        <button class="mini-counter" id="bt-t20">T20 · <span id="bt-t20-count">0</span></button>
+        <button class="mini-counter" id="bt-t19">T19 · <span id="bt-t19-count">0</span></button>
+      </div>
+    </div>
+
+    <!-- Match result + stats -->
+    <div class="game-card hidden" id="bt-result">
+      <div class="done-msg" id="bt-winner"></div>
+      <div class="stats-title" data-i18n="btStats">Match stats</div>
+      <div class="stats-list" id="bt-stats"></div>
+      <button class="btn btn-primary" id="bt-again" data-i18n="playAgain">Play again</button>
+    </div>
+  </section>
+
+  <!-- War Against the Board setup modal -->
+  <div id="bt-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3 data-i18n="battleName">War Against the Board</h3>
+      <p class="modal-hint" data-i18n="btHint">Set up the match</p>
+      <label class="setting-row">
+        <span data-i18n="btScoreToBeat">3-dart score to beat</span>
+        <input type="number" id="bt-set-score" min="1" max="180" value="60" inputmode="numeric">
+      </label>
+      <label class="setting-row">
+        <span data-i18n="btPointsToWin">Points to win</span>
+        <input type="number" id="bt-set-target" min="1" max="100" value="10" inputmode="numeric">
+      </label>
+      <div class="modal-actions">
+        <button class="btn btn-back" data-back data-i18n="cancel">Cancel</button>
+        <button class="btn btn-primary" id="bt-start" data-i18n="start">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/i18n.js"></script>
   <script src="js/lock.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/random-target.js"></script>
   <script src="js/around-board.js"></script>
   <script src="js/calculate.js"></script>
+  <script src="js/battle.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
